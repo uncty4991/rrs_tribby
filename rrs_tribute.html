@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>RRS Tribute — Source</title>
+  <meta name="description" content="I know this is about as sappy as a song from Celine Dion, but just wanted you to know you're the inspiration for this journey into the IT world. Love you, old man. — Tyler" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    body { background: radial-gradient(1200px 600px at 20% 0%, #e6f0f7 0, #ffffff 60%); }
+    .matrix::before{
+      content: "";
+      position: fixed; inset:0; pointer-events:none; opacity:.15;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,.05), rgba(0,0,0,0) 60%),
+        repeating-linear-gradient(90deg, rgba(2,132,199,.25) 0 1px, transparent 1px 12px);
+      mask-image: radial-gradient(circle at 50% 0%, black, transparent 65%);
+    }
+    code { font-feature-settings: "kern" off; }
+  </style>
+</head>
+<body class="text-slate-800">
+  <div class="matrix"></div>
+  <main class="max-w-3xl mx-auto px-4 py-12">
+    <header class="mb-6">
+      <h1 class="text-2xl md:text-3xl font-extrabold text-sky-700">RRS Tribute — Source</h1>
+      <p class="text-sm text-slate-500">Scan delivered you here. Peek the code. Run to see output.</p>
+    </header>
+
+    <!-- Clarion‑style tribute code (disguised with Easter eggs) -->
+    <section class="rounded-xl border bg-white shadow p-4 md:p-6">
+      <pre class="overflow-auto"><code class="text-sm">! RRS Tribute — disguised as real code
+PROGRAM
+MAP
+  PrintTribute(),PROC
+END
+
+! Rail & Trek data (looks normal, means everything)
+LOC:Scale        BYTE(87)          ! HO scale
+LOC:Year         USHORT(1979)
+LOC:LocoBigBoy   USHORT(4014)
+LOC:LocoUP844    USHORT(844)
+LOC:LocoNW611    USHORT(611)
+LOC:Railroads    QUEUE,PRE(RR)
+RR:Code          STRING(8)
+RR:Station       STRING(12)
+               END
+
+! Hidden tokens, hex/binary sprinkled in
+LOC:Hex1979      STRING('0x31 0x39 0x37 0x39')
+LOC:HexDad       STRING('0x64 0x61 0x64')
+LOC:HexPapa      STRING('0x70 0x61 0x70 0x61')
+LOC:HexPopPop    STRING('0x70 0x6F 0x70 0x2D 0x70 0x6F 0x70')
+LOC:HexDrickelle STRING('0x44 0x72 0x69 0x63 0x6B 0x65 0x6C 0x6C 0x65')
+
+! Trek nods
+LOC:StationDS9   STRING('DS9')
+LOC:NCC          STRING('NCC1701')
+LOC:WarpFactor   BYTE(9)
+
+! Scout Oath initialism (first letters only)
+LOC:ScoutOath    STRING('OMHIWDM...MS')  ! truncated for display
+
+CODE
+  ADD(Railroads); RR:Code = 'UPRR';  RR:Station = 'PENN';      PUT(Railroads)
+  ADD(Railroads); RR:Code = 'BNSF';  RR:Station = 'GRANDCEN';  PUT(Railroads)
+  ADD(Railroads); RR:Code = 'CSX';   RR:Station = 'CHICAGO';   PUT(Railroads)
+  ADD(Railroads); RR:Code = 'NS';    RR:Station = 'ROANOKE';   PUT(Railroads)
+
+  IF WarpFactor >= 9 AND Scale = 87 AND Year = 1979
+    ! Looks like a sanity check; really the key to show output
+    PrintTribute()
+  END
+
+PrintTribute PROCEDURE
+CODE
+  MESSAGE('RRS — Star Trek & Railroad legend. Married 1979.\n' & |
+          'HO scale forever; Big Boy ' & LocoBigBoy & ', UP ' & LocoUP844 & \
+          ', N&W ' & LocoNW611 & '.\n' & |
+          'P.S. I know this is about as sappy as a song from Celine Dion, ' & |
+          'but just wanted you to know you\'re the inspiration for this journey into the IT world. ' & |
+          'Love you, old man. — Tyler', 'Tribute')
+  RETURN
+</code></pre>
+      <div class="mt-4 flex gap-3">
+        <button id="runBtn" class="px-4 py-2 rounded-lg bg-sky-600 text-white hover:bg-sky-700">Run</button>
+        <span class="text-xs text-slate-500">(Simulated compile/run)</span>
+      </div>
+    </section>
+
+    <!-- Output panel (revealed on Run) -->
+    <section id="out" class="hidden mt-6 rounded-xl border border-sky-100 bg-sky-50 p-4">
+      <h2 class="font-semibold text-sky-800 mb-2">Program Output</h2>
+      <pre class="text-sky-900 text-sm">RRS — Star Trek & Railroad legend. Married 1979.
+HO scale forever; Big Boy 4014, UP 844, N&W 611.
+
+P.S. I know this is about as sappy as a song from Celine Dion, but just wanted you to know you're the inspiration for this journey into the IT world. Love you, old man. — Tyler</pre>
+    </section>
+
+    <footer class="mt-10 text-xs text-slate-400">
+      <p>Hidden in plain sight: DS9, NCC1701, UPRR, BNSF, CSX, NS, PENN, GRANDCEN, CHICAGO, 4014, 844, 611, HO (1:87).</p>
+    </footer>
+  </main>
+
+  <script>
+    document.getElementById('runBtn').addEventListener('click', function(){
+      document.getElementById('out').classList.remove('hidden');
+      this.textContent = 'Ran ✔';
+      this.disabled = true;
+    });
+  </script>
+</body>
+</html>
